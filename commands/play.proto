@@ -1,0 +1,8 @@
+syntax = "proto2";
+package commands;
+
+import "track.proto";
+
+message PlayCommand{
+	required Track track = 1;
+}

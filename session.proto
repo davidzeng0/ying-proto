@@ -1,0 +1,26 @@
+syntax = "proto2";
+
+import "commands.proto";
+import "track.proto";
+import "voice.proto";
+
+message SessionOpen{
+	/* empty */
+}
+
+message SessionClose{
+	/* empty */
+}
+
+message SessionMessage{
+	required uint64 id = 1;
+
+	oneof data{
+		SessionOpen open = 2;
+		SessionClose close = 3;
+
+		VoiceConnectionControl voice = 4;
+		TrackControl track = 5;
+		Commands commands = 6;
+	}
+}

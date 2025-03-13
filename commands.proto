@@ -1,0 +1,31 @@
+syntax = "proto2";
+
+import "commands/bitrate.proto";
+import "commands/equalizer.proto";
+import "commands/pause.proto";
+import "commands/play.proto";
+import "commands/play_next.proto";
+import "commands/rate.proto";
+import "commands/seek.proto";
+import "commands/tempo.proto";
+import "commands/tremolo.proto";
+import "commands/volume.proto";
+
+message Command{
+	oneof command{
+		commands.BitrateCommand bitrate = 1;
+		commands.EqualizerCommand equalizer = 2;
+		commands.PauseCommand pause = 3;
+		commands.PlayCommand play = 4;
+		commands.PlayNextCommand play_next = 5;
+		commands.RateCommand rate = 6;
+		commands.SeekCommand seek = 7;
+		commands.TempoCommand tempo = 8;
+		commands.TremoloCommand tremolo = 9;
+		commands.VolumeCommand volume = 10;
+	}
+}
+
+message Commands{
+	repeated Command command = 1;
+}

@@ -1,0 +1,6 @@
+syntax = "proto2";
+package commands;
+
+message SeekCommand{
+	required double time = 1;
+}

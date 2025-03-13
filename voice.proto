@@ -1,0 +1,50 @@
+syntax = "proto2";
+
+message VoiceStateUpdate{
+	required string guild_id = 1;
+	required string user_id = 2;
+	required string session_id = 3;
+	optional string channel_id = 4;
+
+	optional bool deaf = 5;
+	optional bool mute = 6;
+}
+
+message VoiceServerUpdate{
+	required string token = 1;
+	optional string endpoint = 2;
+}
+
+enum VoiceState{
+	IDLE = 0;
+	CONNECTING = 1;
+	RESUMING = 2;
+	RTC_CONNECTING = 3;
+	WAITING = 4;
+	READY = 5;
+	DISCONNECTED = 6;
+	RECONNECTING = 7;
+}
+
+enum VoiceDisconnectedReason{
+	NORMAL = 0;
+	CONNECT_TIMEOUT = 1;
+	PROTOCOL_ERROR = 2;
+	HEARTBEAT_TIMEOUT = 3;
+}
+
+message VoiceDisconnected{
+	required VoiceDisconnectedReason reason = 1;
+}
+
+message VoiceConnectionControl{
+	oneof data{
+		/* app -> node */
+		VoiceServerUpdate server_update = 1;
+		VoiceStateUpdate state_update = 2;
+
+		/* node -> app */
+		VoiceState state = 3;
+		VoiceDisconnected disconnected = 4;
+	}
+}
